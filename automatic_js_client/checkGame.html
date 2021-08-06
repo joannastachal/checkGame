@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        const gameField = [
+            [-1, -1, 0, -1, -1, -1, -1],
+            [-1, -1, -1, 0, -1, -1, -1],
+            [-1, -1, -1, -1, 0, 1, -1],
+            [-1, -1, -1, -1, -1, -1, -1],
+            [-1, -1, -1, -1, -1, -1, -1],
+            [-1, -1, -1, -1, -1, -1, -1],
+        ]
+
+
+        function checkForWin(p1) {
+
+            let indexRow = 0;
+
+            for (let row of gameField) {
+                let index = 0
+                for (let place of row) {
+                    if (indexRow === 0 && place === -1 || indexRow > 0 && gameField[indexRow - 1][index] >= 0 && place === -1) {
+                        if (
+                            // 3 left, 3 right, 2 left & 1 right, 1 left & 2 right
+                            row[index + 1] === p1 && row[index + 2] === p1 && row[index + 3] === p1 ||
+                            row[index - 1] === p1 && row[index - 2] === p1 && row[index - 3] === p1 ||
+                            row[index - 1] === p1 && row[index + 1] === p1 && row[index + 2] === p1 ||
+                            row[index - 1] === p1 && row[index - 2] === p1 && row[index + 1] === p1 ||
+                            // beginning from column 4 -> 3 down 
+                            indexRow >= 3 && gameField[indexRow - 1][index] === p1 && gameField[indexRow - 2][index] === p1 && gameField[indexRow - 3][index] === p1 ||
+                            // diagonal 
+                            indexRow >= 3 && gameField[indexRow - 1][index + 1] === p1 && gameField[indexRow - 2][index + 2] === p1 && gameField[indexRow - 3][index + 3] === p1 ||
+                            indexRow >= 2 && indexRow < 5 && gameField[indexRow - 1][index + 1] === p1 && gameField[indexRow + 1][index - 1] === p1 && gameField[indexRow - 2][index + 2] === p1 ||
+                            indexRow >= 1 && indexRow < 4 && gameField[indexRow - 1][index + 1] === p1 && gameField[indexRow + 1][index - 1] === p1 && gameField[indexRow + 2][index - 2] === p1 ||
+                            indexRow >= 0 && indexRow < 3 && gameField[indexRow + 1][index - 1] === p1 && gameField[indexRow + 2][index - 2] === p1 && gameField[indexRow + 3][index - 3] === p1 ||
+
+                            indexRow >= 3 && gameField[indexRow - 1][index - 1] === p1 && gameField[indexRow - 2][index - 2] === p1 && gameField[indexRow - 3][index - 3] === p1 ||
+                            indexRow >= 2 && indexRow < 5 && gameField[indexRow - 1][index - 1] === p1 && gameField[indexRow - 2][index - 2] === p1 && gameField[indexRow + 1][index + 1] === p1 ||
+                            indexRow >= 1 && indexRow < 4 && gameField[indexRow - 1][index - 1] === p1 && gameField[indexRow + 1][index + 1] === p1 && gameField[indexRow + 2][index + 2] === p1 ||
+                            indexRow >= 0 && indexRow < 3 && gameField[indexRow + 1][index + 1] === p1 && gameField[indexRow + 2][index + 2] === p1 && gameField[indexRow + 3][index + 3] === p1
+                        ) {
+                            const winningMove = {
+                                xAxis: index,
+                                yAxis: indexRow
+                            }
+                            return winningMove
+                        }
+                    }
+                    index++;
+                }
+                indexRow++;
+            }
+        }
+
+        var win = checkForWin(0).xAxis
+        console.log(win)
+
+        function checkPossibleMoves() {
+            const gameFieldCopy = gameField;
+
+            while (!move) {
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
